@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "sso.v1;sso1";
+
+// Auth service is the service for user interaction
+service Auth {
+  // Register is the method for user registration
+  rpc Register (RegisterRequest) returns (RegisterResponse);
+  // Login is the method for user login;
+  rpc Login (LoginRequest) returns (LoginResponse);
+  // IsAdmin is tke method for checking user is admin or not
+  rpc IsAdmin (IsAdminRequest) returns (IsAdminResponse);
+}
+
+message RegisterRequest{
+  // email of the user to register
+  string email = 1;
+  // password of user to register
+  string password = 2;
+  // app_id is the id of application
+  int32 app_id = 3;
+}
+
+message RegisterResponse {
+  // user_id of the register user
+  int64  user_id = 1;
+}
+
+message LoginRequest {
+  // email of the user to login
+  string email = 1;
+  // password of the user password
+  string password = 2;
+}
+
+message LoginResponse{
+  // token of user for auth
+  string  token = 1;
+}
+
+message IsAdminRequest{
+  // user_id for validate
+  int64  user_id = 1;
+}
+
+message IsAdminResponse {
+  // is_admin is the identification is the user an admin or not
+  bool is_admin = 1;
+}
